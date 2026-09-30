@@ -31,11 +31,25 @@ main{max-width:none;width:100%;margin:0;min-height:0;flex:1;display:flex;flex-di
 @media(max-width:650px){.head{padding:10px 12px;gap:12px;align-items:center}.logo{width:86px;max-height:42px}.brand{padding-right:12px}.brand h1{font-size:20px}.brand p{font-size:12px}main{padding:12px}.intro{display:flex;margin-bottom:10px}.intro h2{font-size:16px}.intro p{font-size:12px;margin:0}.card{border-top-width:3px;border-radius:10px}}
 @media(max-height:440px){.head{padding:6px 12px}.logo{width:78px;max-height:34px}.brand h1{font-size:18px}.brand p{font-size:12px}.intro{display:none}main{padding:10px}}
 
+
+/* V2: larger titles, smaller descriptions, compact cards */
+.card{justify-content:center;align-items:flex-start;gap:0}
+.card .txt{min-width:0}
+.card h3{font-size:var(--title,28px);font-weight:800;line-height:1.25;margin:0 0 .35em}
+.card p{font-size:var(--font,16px);line-height:1.4;margin:0}
+.open{margin-top:14px}
+.ver{font-size:12px;color:var(--muted)}
+@media(max-width:650px){
+ .card{flex-direction:row;align-items:center;gap:14px;padding:14px 16px}
+ .card .icon{margin:0;width:46px;height:46px}
+ .card .open{display:none}
+ .grid.compact .icon{display:grid}
+}
 </style>
 <script data-goatcounter="https://tiktin-apps.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
-<header><div class="head"><img class="logo" src="tiktin-logo.png" alt="טיקטין תכנון חשמל" width="213" height="92"><div class="brand"><h1>אפליקציה ראשית</h1><p>משרד טיקטין</p></div></div></header>
+<header><div class="head"><img class="logo" src="tiktin-logo.png" alt="טיקטין תכנון חשמל" width="213" height="92"><div class="brand"><h1>אפליקציה ראשית</h1><p>משרד טיקטין · <span class="ver">גרסה V2 · 30.09.2026</span></p></div></div></header>
 <main><div class="intro"><h2>כלי המשרד</h2><p>בחרו כלי להתחלת העבודה</p></div><div class="grid" id="tools"></div><p class="note">כל כלי נפתח בלשונית נפרדת ופועל כאפליקציה עצמאית.</p></main>
 <footer>משרד טיקטין · תכנון חשמל</footer>
 <script>
@@ -48,29 +62,25 @@ const initialApps=[
 ];
 const paths={cable:'M7 4v20M15 4v20M23 4v20M7 9h16M7 19h16',generator:'M5 9h20v16H5zM9 5h8v4M9 25v3M21 25v3M17 12l-5 7h5l-2 4 7-9h-5',building:'M5 28V5h14v23M19 13h8v15M10 10h4M10 16h4M10 22h4M23 18h1M23 23h1M3 28h26',meter:'M6 4h20v24H6zM10 8h12v9H10zM13 14l3-3 3 2M10 22h3M19 22h3',tool:'M7 5h18v23H7zM12 11h8M12 17h8M12 23h5'};
 const grid=document.getElementById('tools');
-function render(apps){grid.replaceChildren();for(const app of apps){const a=document.createElement('a');a.className='card';a.href=app.url||`https://${OWNER}.github.io/${encodeURIComponent(app.repo)}/`;a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',app.title+' — פתיחה בלשונית חדשה');const icon=document.createElement('span');icon.className='icon';icon.setAttribute('aria-hidden','true');icon.innerHTML=`<svg viewBox="0 0 32 32"><path d="${paths[app.icon]||paths.tool}"/></svg>`;const h=document.createElement('h3');h.textContent=app.title;const p=document.createElement('p');p.textContent=app.description;const open=document.createElement('span');open.className='open';open.innerHTML='פתיחת הכלי <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M11 3h6v6M17 3l-8 8M8 4H4v12h12v-4"/></svg>';a.append(icon,h,p,open);grid.append(a)}requestAnimationFrame(fitGrid)}
+function render(apps){grid.replaceChildren();for(const app of apps){const a=document.createElement('a');a.className='card';a.href=app.url||`https://${OWNER}.github.io/${encodeURIComponent(app.repo)}/`;a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',app.title+' — פתיחה בלשונית חדשה');const icon=document.createElement('span');icon.className='icon';icon.setAttribute('aria-hidden','true');icon.innerHTML=`<svg viewBox="0 0 32 32"><path d="${paths[app.icon]||paths.tool}"/></svg>`;const txt=document.createElement('div');txt.className='txt';const h=document.createElement('h3');h.textContent=app.title;const p=document.createElement('p');p.textContent=app.description;txt.append(h,p);const open=document.createElement('span');open.className='open';open.innerHTML='פתיחת הכלי <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M11 3h6v6M17 3l-8 8M8 4H4v12h12v-4"/></svg>';a.append(icon,txt,open);grid.append(a)}requestAnimationFrame(fitGrid)}
 
 function fitGrid(){
  const n=grid.children.length;if(!n)return;
- const w=grid.clientWidth,h=grid.clientHeight;
- const gap=Math.max(6,Math.min(18,w*.018));
- let cols=2,rows=Math.ceil(n/2),best=-Infinity;
- if(n!==4){for(let c=1;c<=n;c++){
-  const r=Math.ceil(n/c),cw=(w-gap*(c-1))/c,ch=(h-gap*(r-1))/r;
-  const score=Math.min(cw,ch*1.35)*(n/(c*r));
-  if(score>best){best=score;cols=c;rows=r}
- }}
+ const w=grid.clientWidth,h=grid.clientHeight,narrow=w<600;
+ const gap=narrow?10:Math.max(10,Math.min(18,w*.016));
+ let cols=narrow?1:(n<=4?2:Math.min(n,Math.max(2,Math.round(Math.sqrt(n*w/(h*1.6))))));
+ const rows=Math.ceil(n/cols);
  grid.style.setProperty('--cols',cols);grid.style.setProperty('--rows',rows);grid.style.setProperty('--gap',gap+'px');
  const cw=(w-gap*(cols-1))/cols,ch=(h-gap*(rows-1))/rows;
- grid.classList.toggle('compact',ch<210||cw<220);
- grid.style.setProperty('--pad',Math.max(6,Math.min(28,Math.min(cw,ch)*.085))+'px');
- grid.style.setProperty('--icon',Math.max(24,Math.min(52,ch*.16))+'px');
+ grid.classList.toggle('compact',!narrow&&(ch<170||cw<220));
+ grid.style.setProperty('--pad',(narrow?14:Math.max(14,Math.min(34,Math.min(cw,ch)*.09)))+'px');
+ grid.style.setProperty('--icon',(narrow?46:Math.max(36,Math.min(56,ch*.17)))+'px');
  for(const card of grid.children){
-  let font=Math.min(16,Math.max(10,Math.min(cw/19,ch/14)));
-  let title=Math.min(24,font*1.4);
+  let title=narrow?Math.min(21,Math.max(17,cw/15)):Math.min(30,Math.max(18,Math.min(cw/17,ch/7)));
+  let font=narrow?14:Math.min(17,Math.max(13,title*.6));
   card.style.setProperty('--font',font+'px');card.style.setProperty('--title',title+'px');
   for(let i=0;i<30&&(card.scrollHeight>card.clientHeight+1||card.scrollWidth>card.clientWidth+1);i++){
-   font*=.94;title*=.94;card.style.setProperty('--font',font+'px');card.style.setProperty('--title',title+'px');
+   title*=.95;font=Math.max(11,font*.96);card.style.setProperty('--font',font+'px');card.style.setProperty('--title',title+'px');
   }
  }
 }
