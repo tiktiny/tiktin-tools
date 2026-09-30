@@ -8,6 +8,29 @@
 <link rel="icon" href="icons/tiktin-192.png"><link rel="apple-touch-icon" href="icons/tiktin-180.png"><link rel="manifest" href="manifest.webmanifest?v=2">
 <style>
 :root{color-scheme:light;--ink:#17364c;--muted:#596b77;--red:#c42635;--line:#dde5e9}*{box-sizing:border-box}body{margin:0;background:#f3f6f8;color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px;line-height:1.5}header{background:white;border-bottom:1px solid var(--line)}.head{max-width:1120px;margin:auto;padding:26px 28px;display:flex;align-items:center;gap:28px}.logo{width:170px;height:auto}.brand{border-right:1px solid var(--line);padding-right:28px}.brand p{margin:0;color:var(--muted);font-size:14px}h1{font-size:clamp(23px,3vw,32px);margin:0 0 3px;line-height:1.3}main{max-width:1120px;margin:0 auto;padding:40px 28px 24px}.intro{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:22px}h2{font-size:22px;margin:0}.intro p{color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.card{display:flex;flex-direction:column;position:relative;padding:28px;background:white;border:1px solid var(--line);border-top:4px solid var(--ink);border-radius:14px;color:inherit;text-decoration:none;min-height:250px;box-shadow:0 5px 18px #17364c06;transition:transform .15s,box-shadow .15s,border-color .15s}.card:hover{transform:translateY(-3px);box-shadow:0 10px 26px #17364c12;border-color:#afbdc7}.card:focus-visible{outline:3px solid var(--red);outline-offset:4px}.card:nth-child(2){border-top-color:var(--red)}.card:nth-child(3){border-top-color:#297a83}.card:nth-child(4){border-top-color:#bb781d}.icon{width:52px;height:52px;border-radius:12px;background:#edf3f7;display:grid;place-items:center;margin-bottom:18px}.icon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.card:nth-child(2) .icon{background:#fff0f1;color:var(--red)}.card:nth-child(3) .icon{background:#eaf5f4;color:#297a83}.card:nth-child(4) .icon{background:#fff5e6;color:#9a6518}.card h3{font-size:22px;line-height:1.4;margin:0 0 10px}.card p{color:var(--muted);margin:0 0 22px}.open{margin-top:auto;font-size:15px;font-weight:bold;color:var(--ink);display:flex;gap:8px;align-items:center}.open svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7}.note{margin:28px 0 0;color:var(--muted);font-size:14px;text-align:center}footer{max-width:1120px;margin:auto;padding:20px 28px 30px;color:var(--muted);font-size:14px;text-align:center}@media(max-width:650px){.head{padding:22px 20px;gap:16px;align-items:flex-start}.logo{width:112px}.brand{padding-right:16px}.brand p{font-size:13px}h1{font-size:22px}main{padding:28px 20px 18px}.intro{display:block}.intro p{margin-top:5px}.grid{grid-template-columns:1fr;gap:16px}.card{padding:24px;min-height:230px}.card h3{font-size:21px}}@media(prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+
+/* One-screen launcher: grid adjusts to the viewport and number of tools. */
+html,body{width:100%;height:100%;overflow:hidden}
+body{height:100dvh;display:flex;flex-direction:column}
+header{flex:0 0 auto}
+.head{max-width:none;padding:12px 24px;gap:22px}
+.logo{width:126px;max-height:55px;object-fit:contain}
+.brand{padding-right:22px}.brand h1{font-size:26px}
+main{max-width:none;width:100%;margin:0;min-height:0;flex:1;display:flex;flex-direction:column;padding:18px 24px 24px}
+.intro{flex:0 0 auto;margin-bottom:14px}.intro h2{font-size:19px}
+.grid{flex:1;min-height:0;gap:var(--gap,18px);grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));grid-template-rows:repeat(var(--rows,2),minmax(0,1fr))}
+.card{min-width:0;min-height:0;overflow:hidden;padding:var(--pad,24px);border-radius:12px;justify-content:center}
+.card:hover{transform:none;background:#fafdff}
+.card h3{font-size:var(--title,22px);line-height:1.28;margin:0 0 .6em;overflow-wrap:anywhere}
+.card p{font-size:var(--font,16px);line-height:1.35;margin:0 0 .8em;overflow-wrap:anywhere}
+.icon{width:var(--icon,48px);height:var(--icon,48px);flex-shrink:0;margin-bottom:12px}
+.icon svg{width:65%;height:65%}
+.open{margin-top:8px;font-size:var(--font,15px);flex-shrink:0}
+.note,footer{display:none}
+.grid.compact .icon{display:none}.grid.compact .open{display:none}
+@media(max-width:650px){.head{padding:10px 12px;gap:12px;align-items:center}.logo{width:86px;max-height:42px}.brand{padding-right:12px}.brand h1{font-size:20px}.brand p{font-size:12px}main{padding:12px}.intro{display:flex;margin-bottom:10px}.intro h2{font-size:16px}.intro p{font-size:12px;margin:0}.card{border-top-width:3px;border-radius:10px}}
+@media(max-height:440px){.head{padding:6px 12px}.logo{width:78px;max-height:34px}.brand h1{font-size:18px}.brand p{font-size:12px}.intro{display:none}main{padding:10px}}
+
 </style>
 </head>
 <body>
@@ -24,7 +47,34 @@ const initialApps=[
 ];
 const paths={cable:'M7 4v20M15 4v20M23 4v20M7 9h16M7 19h16',generator:'M5 9h20v16H5zM9 5h8v4M9 25v3M21 25v3M17 12l-5 7h5l-2 4 7-9h-5',building:'M5 28V5h14v23M19 13h8v15M10 10h4M10 16h4M10 22h4M23 18h1M23 23h1M3 28h26',meter:'M6 4h20v24H6zM10 8h12v9H10zM13 14l3-3 3 2M10 22h3M19 22h3',tool:'M7 5h18v23H7zM12 11h8M12 17h8M12 23h5'};
 const grid=document.getElementById('tools');
-function render(apps){grid.replaceChildren();for(const app of apps){const a=document.createElement('a');a.className='card';a.href=app.url||`https://${OWNER}.github.io/${encodeURIComponent(app.repo)}/`;a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',app.title+' — פתיחה בלשונית חדשה');const icon=document.createElement('span');icon.className='icon';icon.setAttribute('aria-hidden','true');icon.innerHTML=`<svg viewBox="0 0 32 32"><path d="${paths[app.icon]||paths.tool}"/></svg>`;const h=document.createElement('h3');h.textContent=app.title;const p=document.createElement('p');p.textContent=app.description;const open=document.createElement('span');open.className='open';open.innerHTML='פתיחת הכלי <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M11 3h6v6M17 3l-8 8M8 4H4v12h12v-4"/></svg>';a.append(icon,h,p,open);grid.append(a)}}
+function render(apps){grid.replaceChildren();for(const app of apps){const a=document.createElement('a');a.className='card';a.href=app.url||`https://${OWNER}.github.io/${encodeURIComponent(app.repo)}/`;a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',app.title+' — פתיחה בלשונית חדשה');const icon=document.createElement('span');icon.className='icon';icon.setAttribute('aria-hidden','true');icon.innerHTML=`<svg viewBox="0 0 32 32"><path d="${paths[app.icon]||paths.tool}"/></svg>`;const h=document.createElement('h3');h.textContent=app.title;const p=document.createElement('p');p.textContent=app.description;const open=document.createElement('span');open.className='open';open.innerHTML='פתיחת הכלי <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M11 3h6v6M17 3l-8 8M8 4H4v12h12v-4"/></svg>';a.append(icon,h,p,open);grid.append(a)}requestAnimationFrame(fitGrid)}
+
+function fitGrid(){
+ const n=grid.children.length;if(!n)return;
+ const w=grid.clientWidth,h=grid.clientHeight;
+ const gap=Math.max(6,Math.min(18,w*.018));
+ let cols=2,rows=Math.ceil(n/2),best=-Infinity;
+ if(n!==4){for(let c=1;c<=n;c++){
+  const r=Math.ceil(n/c),cw=(w-gap*(c-1))/c,ch=(h-gap*(r-1))/r;
+  const score=Math.min(cw,ch*1.35)*(n/(c*r));
+  if(score>best){best=score;cols=c;rows=r}
+ }}
+ grid.style.setProperty('--cols',cols);grid.style.setProperty('--rows',rows);grid.style.setProperty('--gap',gap+'px');
+ const cw=(w-gap*(cols-1))/cols,ch=(h-gap*(rows-1))/rows;
+ grid.classList.toggle('compact',ch<210||cw<220);
+ grid.style.setProperty('--pad',Math.max(6,Math.min(28,Math.min(cw,ch)*.085))+'px');
+ grid.style.setProperty('--icon',Math.max(24,Math.min(52,ch*.16))+'px');
+ for(const card of grid.children){
+  let font=Math.min(16,Math.max(10,Math.min(cw/19,ch/14)));
+  let title=Math.min(24,font*1.4);
+  card.style.setProperty('--font',font+'px');card.style.setProperty('--title',title+'px');
+  for(let i=0;i<30&&(card.scrollHeight>card.clientHeight+1||card.scrollWidth>card.clientWidth+1);i++){
+   font*=.94;title*=.94;card.style.setProperty('--font',font+'px');card.style.setProperty('--title',title+'px');
+  }
+ }
+}
+new ResizeObserver(()=>requestAnimationFrame(fitGrid)).observe(grid);
+
 render(initialApps);
 // Automatically discover new public GitHub Pages applications, retaining approved names.
 async function refreshApps(){try{const repos=[];for(let page=1;page<=10;page++){const response=await fetch(`https://api.github.com/users/${OWNER}/repos?per_page=100&page=${page}`,{headers:{Accept:'application/vnd.github+json'}});if(!response.ok)return;const batch=await response.json();if(!Array.isArray(batch))return;repos.push(...batch);if(batch.length<100)break}const known=new Set(initialApps.map(a=>a.repo));const extras=repos.filter(r=>r.has_pages&&!r.archived&&r.name!==HUB&&!known.has(r.name)).sort((a,b)=>a.name.localeCompare(b.name)).map(r=>({repo:r.name,title:r.description||r.name.replace(/[-_]/g,' '),description:'כלי נוסף של משרד טיקטין',icon:'tool'}));render([...initialApps,...extras]);}catch{/* The four built-in links remain usable if GitHub cannot be reached. */}}
