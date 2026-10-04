@@ -49,7 +49,7 @@ main{max-width:none;width:100%;margin:0;min-height:0;flex:1;display:flex;flex-di
 <script data-goatcounter="https://tiktin-apps.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
-<header><div class="head"><img class="logo" src="tiktin-logo.png" alt="טיקטין תכנון חשמל" width="213" height="92"><div class="brand"><h1>אפליקציה ראשית</h1><p>משרד טיקטין · <span class="ver">גרסה V2 · 30.09.2026</span></p></div></div></header>
+<header><div class="head"><img class="logo" src="tiktin-logo.png" alt="טיקטין תכנון חשמל" width="213" height="92"><div class="brand"><h1>אפליקציה ראשית</h1><p>משרד טיקטין · <span class="ver">גרסה V3 · 03.10.2026</span></p></div></div></header>
 <main><div class="intro"><h2>כלי המשרד</h2><p>בחרו כלי להתחלת העבודה</p></div><div class="grid" id="tools"></div><p class="note">כל כלי נפתח בלשונית נפרדת ופועל כאפליקציה עצמאית.</p></main>
 <footer>משרד טיקטין · תכנון חשמל</footer>
 <script>
@@ -58,9 +58,10 @@ const initialApps=[
  {repo:'cable-sc',title:'כבלים, הארקה וזרמי קצר',description:'חישוב חתכי כבלים, גידי הארקה, מפל מתח וזרמי קצר.',icon:'cable'},
  {repo:'tiktin-generator-selector',title:'בחירת גנרטור',description:'בחירת גנרטור לפי הספק, מידות, חדר ופתחים.',icon:'generator'},
  {repo:'-tiktin-residential-connection-generator-calculator',title:'קביעת גדלי חיבורים וגנרטורים בבניני מגורים ועירוב שימושים',description:'ריכוז עומסי הפרויקט וקביעת גדלי חיבורי החשמל והגנרטורים.',icon:'building'},
- {repo:'meter-room',title:'תיכנון חדר מונים של חברת חשמל בבניני מגורים',description:'תכנון וסידור חדר המונים בפרויקט מגורים.',icon:'meter'}
+ {repo:'meter-room',title:'תיכנון חדר מונים של חברת חשמל בבניני מגורים',description:'תכנון וסידור חדר המונים בפרויקט מגורים.',icon:'meter'},
+ {repo:'ev-charging-boards',title:'חישוב לוחות טעינה וסכמה',description:'גודל חיבורי טעינה לרכבים חשמליים, לוחות טעינה בחניון וסכמה ורטיקלית.',icon:'evcharge'}
 ];
-const paths={cable:'M7 4v20M15 4v20M23 4v20M7 9h16M7 19h16',generator:'M5 9h20v16H5zM9 5h8v4M9 25v3M21 25v3M17 12l-5 7h5l-2 4 7-9h-5',building:'M5 28V5h14v23M19 13h8v15M10 10h4M10 16h4M10 22h4M23 18h1M23 23h1M3 28h26',meter:'M6 4h20v24H6zM10 8h12v9H10zM13 14l3-3 3 2M10 22h3M19 22h3',tool:'M7 5h18v23H7zM12 11h8M12 17h8M12 23h5'};
+const paths={cable:'M7 4v20M15 4v20M23 4v20M7 9h16M7 19h16',generator:'M5 9h20v16H5zM9 5h8v4M9 25v3M21 25v3M17 12l-5 7h5l-2 4 7-9h-5',building:'M5 28V5h14v23M19 13h8v15M10 10h4M10 16h4M10 22h4M23 18h1M23 23h1M3 28h26',meter:'M6 4h20v24H6zM10 8h12v9H10zM13 14l3-3 3 2M10 22h3M19 22h3',tool:'M7 5h18v23H7zM12 11h8M12 17h8M12 23h5',evcharge:'M2 22v-5l3-6h11l3 6v5zM2 17h17M4.5 22a2.2 2.2 0 1 0 4.4 0M12.5 22a2.2 2.2 0 1 0 4.4 0M24 6h6v6h-6zM25.5 3v3M28.5 3v3M27 12v4h-4v4h-4'};
 const grid=document.getElementById('tools');
 function render(apps){grid.replaceChildren();for(const app of apps){const a=document.createElement('a');a.className='card';a.href=app.url||`https://${OWNER}.github.io/${encodeURIComponent(app.repo)}/`;a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',app.title+' — פתיחה בלשונית חדשה');const icon=document.createElement('span');icon.className='icon';icon.setAttribute('aria-hidden','true');icon.innerHTML=`<svg viewBox="0 0 32 32"><path d="${paths[app.icon]||paths.tool}"/></svg>`;const txt=document.createElement('div');txt.className='txt';const h=document.createElement('h3');h.textContent=app.title;const p=document.createElement('p');p.textContent=app.description;txt.append(h,p);const open=document.createElement('span');open.className='open';open.innerHTML='פתיחת הכלי <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M11 3h6v6M17 3l-8 8M8 4H4v12h12v-4"/></svg>';a.append(icon,txt,open);grid.append(a)}requestAnimationFrame(fitGrid)}
 
