@@ -62,7 +62,7 @@ main{max-width:none;width:100%;margin:0;min-height:0;flex:1;display:flex;flex-di
 <script data-goatcounter="https://tiktin-apps.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
-<header><div class="head"><img class="logo" src="tiktin-logo.png" alt="טיקטין תכנון חשמל" width="213" height="92"><div class="brand"><h1>אפליקציה ראשית</h1><p>משרד טיקטין · <span class="ver">גרסה V6 · 06.10.2026</span></p></div></div></header>
+<header><div class="head"><img class="logo" src="tiktin-logo.png" alt="טיקטין תכנון חשמל" width="213" height="92"><div class="brand"><h1>אפליקציה ראשית</h1><p>משרד טיקטין · <span class="ver">גרסה V7 · 27.10.2026</span></p></div></div></header>
 <main><div class="intro"><h2>כלי המשרד</h2><p>בחרו כלי להתחלת העבודה</p></div><div class="grid" id="tools"></div><div id="pager" aria-label="מעבר בין דפים"><span class="pgtxt" id="pgTxt"></span><div class="dots" id="dots"></div></div><p class="note">כל כלי נפתח בלשונית נפרדת ופועל כאפליקציה עצמאית.</p></main>
 <footer>משרד טיקטין · תכנון חשמל</footer>
 <script>
@@ -76,9 +76,10 @@ const initialApps=[
  {repo:'residential-guidelines',title:'הכנה אוטומטית של הנחיות חשמל לפרויקט מגורים ועירוב שימושים',description:'הפקת הנחיות חשמל אוטומטיות עבור אדריכל לבנין מגורים ועירוב שימושים, כולל קלט מצגת הפרויקט.',icon:'doc'},
  {repo:'iec-shaft',title:'חישוב רוחב פיר חברת חשמל מונים בקומות',description:'רוחב פיר כבלי חח״י 95 ו־240 לפי מחשבון העומסים, כולל קליטת תמהיל דירות מקובץ.',icon:'shaft'},
  {repo:'iec-transformers',title:'קביעת כמות שנאים חברת חשמל',description:'כמות וגודל שנאי חח״י (630 / 1000) לכל בניין וחלוקה לחדרי שנאים, לפי מחשבון העומסים.',icon:'transformer'},
+ {repo:'iec-orders',title:'מסמך פתיחת הזמנות חברת חשמל לפרויקט',description:'הכנת מסמך לפתיחת הזמנות באתר חח״י: לקוח, בניינים ותמהיל, חניון, מסחר וחיבור זמני – Excel ל-SKILL, Word ו-PDF.',icon:'order'},
  {repo:'sii-panel-cert',url:'https://www.sii.org.il/he/certificationssearch?approveType=11&auto=true',title:'בדיקת תו תקן למפעל לוחות – מכון התקנים',description:'קישור לאתר מכון התקנים: חיפוש מפעלי לוחות חשמל בעלי תו תקן.',icon:'cert'}
 ];
-const paths={cert:'M16 3l3 3h4v4l3 3-3 3v4h-4l-3 3-3-3H9v-4l-3-3 3-3V6h4zM12 15l3 3 6-6',transformer:'M4 5h24v22H4zM11 10c3 0 3 3 0 3 3 0 3 3 0 3 3 0 3 3 0 3M21 10c-3 0-3 3 0 3-3 0-3 3 0 3-3 0-3 3 0 3M15 9v14M17 9v14',shaft:'M9 3h14v26H9zM13 7v19M17 7v19M21 7v12M9 7h14',cable:'M7 4v20M15 4v20M23 4v20M7 9h16M7 19h16',generator:'M5 9h20v16H5zM9 5h8v4M9 25v3M21 25v3M17 12l-5 7h5l-2 4 7-9h-5',building:'M5 28V5h14v23M19 13h8v15M10 10h4M10 16h4M10 22h4M23 18h1M23 23h1M3 28h26',meter:'M6 4h20v24H6zM10 8h12v9H10zM13 14l3-3 3 2M10 22h3M19 22h3',tool:'M7 5h18v23H7zM12 11h8M12 17h8M12 23h5',doc:'M8 3h11l6 6v20H8zM19 3v6h6M12 14h9M12 18h9M12 22h5M21 21l-2 3h3l-2 3',evcharge:'M2 22v-5l3-6h11l3 6v5zM2 17h17M4.5 22a2.2 2.2 0 1 0 4.4 0M12.5 22a2.2 2.2 0 1 0 4.4 0M24 6h6v6h-6zM25.5 3v3M28.5 3v3M27 12v4h-4v4h-4'};
+const paths={order:'M9 5h14v23H9zM13 3h6v4h-6zM17 11l-4 6h4l-2 5 6-7h-4l2-4',cert:'M16 3l3 3h4v4l3 3-3 3v4h-4l-3 3-3-3H9v-4l-3-3 3-3V6h4zM12 15l3 3 6-6',transformer:'M4 5h24v22H4zM11 10c3 0 3 3 0 3 3 0 3 3 0 3 3 0 3 3 0 3M21 10c-3 0-3 3 0 3-3 0-3 3 0 3-3 0-3 3 0 3M15 9v14M17 9v14',shaft:'M9 3h14v26H9zM13 7v19M17 7v19M21 7v12M9 7h14',cable:'M7 4v20M15 4v20M23 4v20M7 9h16M7 19h16',generator:'M5 9h20v16H5zM9 5h8v4M9 25v3M21 25v3M17 12l-5 7h5l-2 4 7-9h-5',building:'M5 28V5h14v23M19 13h8v15M10 10h4M10 16h4M10 22h4M23 18h1M23 23h1M3 28h26',meter:'M6 4h20v24H6zM10 8h12v9H10zM13 14l3-3 3 2M10 22h3M19 22h3',tool:'M7 5h18v23H7zM12 11h8M12 17h8M12 23h5',doc:'M8 3h11l6 6v20H8zM19 3v6h6M12 14h9M12 18h9M12 22h5M21 21l-2 3h3l-2 3',evcharge:'M2 22v-5l3-6h11l3 6v5zM2 17h17M4.5 22a2.2 2.2 0 1 0 4.4 0M12.5 22a2.2 2.2 0 1 0 4.4 0M24 6h6v6h-6zM25.5 3v3M28.5 3v3M27 12v4h-4v4h-4'};
 const grid=document.getElementById('tools');
 const PER_PAGE=4; // מספר כלים בדף בטלפון
 let APPS=[], PAGED=null;
