@@ -71,7 +71,7 @@ body.zoomed .tool{flex:none;max-height:none;min-height:58px}body.zoomed .tool p{
 </style>
 </head>
 <body>
-<header><div class="head"><img class="logo" src="tiktin-logo.png" alt="טיקטין תכנון חשמל" width="213" height="92"><div class="brand"><h1>אפליקציה ראשית</h1><p>כלי התכנון של משרד טיקטין · <span class="ver">גרסה V11 · 13.11.2026</span></p></div>
+<header><div class="head"><img class="logo" src="tiktin-logo.png" alt="טיקטין תכנון חשמל" width="213" height="92"><div class="brand"><h1>אפליקציה ראשית</h1><p>כלי התכנון של משרד טיקטין · <span class="ver">גרסה V12 · 14.11.2026</span></p></div>
 <div class="fz" role="group" aria-label="גודל התצוגה" title="שינוי גודל התצוגה של הדף הזה בלבד – הדפדפן לא מושפע">
 <button id="fzMinus" title="הקטנה">−</button><button id="fzVal" title="חזרה לגודל רגיל (100%)">100%</button><button id="fzPlus" title="הגדלה">+</button><button id="fzFit" title="הגודל הגדול ביותר שבו כל הכלים נכנסים במסך בלי גלילה">התאמה למסך</button><button id="fzKeep" class="keep" title="שמירת גודל התצוגה של הדף הזה במחשב הזה">שמירת גודל טופס במסך</button>
 </div></div></header><div id="fzToast" role="status"></div>
@@ -83,6 +83,7 @@ const initialApps=[
  {repo:'tiktin-generator-selector',title:'בחירת גנרטור',description:'בחירת גנרטור לפי הספק, מידות, חדר ופתחים.',icon:'generator'},
  {repo:'-tiktin-residential-connection-generator-calculator',title:'קביעת גדלי חיבורים וגנרטורים בבניני מגורים ועירוב שימושים',description:'ריכוז עומסי הפרויקט וקביעת גדלי חיבורי החשמל והגנרטורים.',icon:'building'},
  {repo:'meter-room',title:'תיכנון חדר מונים של חברת חשמל בבניני מגורים',description:'תכנון וסידור חדר המונים בפרויקט מגורים.',icon:'meter'},
+ {repo:'sprinkler-pump',title:'משאבות ספרינקלרים – הגנות, כבל חסין אש וגנרטור',description:'מפסק מגנטי בלוח המזין, כבל חסין אש, גודל לוח המשאבה וגנרטור מינימלי להתנעת כוכב-משולש – לפי הספק המשאבה.',icon:'sprinkler'},
  {repo:'ev-charging-boards',title:'חישוב לוחות טעינה וסכמה',description:'גודל חיבורי טעינה לרכבים חשמליים, לוחות טעינה בחניון וסכמה ורטיקלית.',icon:'evcharge'},
  {repo:'residential-guidelines',title:'הכנה אוטומטית של הנחיות חשמל לפרויקט מגורים ועירוב שימושים',description:'הפקת הנחיות חשמל אוטומטיות עבור אדריכל לבנין מגורים ועירוב שימושים, כולל קלט מצגת הפרויקט.',icon:'doc'},
  {repo:'iec-shaft',title:'חישוב רוחב פיר חברת חשמל מונים בקומות',description:'רוחב פיר כבלי חח״י 95 ו־240 לפי מחשבון העומסים, כולל קליטת תמהיל דירות מקובץ.',icon:'shaft'},
@@ -94,11 +95,11 @@ const initialApps=[
  {repo:'tiktin-forms',title:'קישור לתפריט טפסים משרד טיקטין',description:'כלי נוסף של משרד טיקטין',icon:'tool'},
  {repo:'tiktin-projects',title:'תוכנית ניהול פרויקטים (מחליפה MASTER)\u200F – TIKTIN PROJECTS',description:'כלי נוסף של משרד טיקטין',icon:'tool'}
 ];
-const paths={order:'M9 5h14v23H9zM13 3h6v4h-6zM17 11l-4 6h4l-2 5 6-7h-4l2-4',cert:'M16 3l3 3h4v4l3 3-3 3v4h-4l-3 3-3-3H9v-4l-3-3 3-3V6h4zM12 15l3 3 6-6',transformer:'M4 5h24v22H4zM11 10c3 0 3 3 0 3 3 0 3 3 0 3 3 0 3 3 0 3M21 10c-3 0-3 3 0 3-3 0-3 3 0 3-3 0-3 3 0 3M15 9v14M17 9v14',shaft:'M9 3h14v26H9zM13 7v19M17 7v19M21 7v12M9 7h14',cable:'M7 4v20M15 4v20M23 4v20M7 9h16M7 19h16',generator:'M5 9h20v16H5zM9 5h8v4M9 25v3M21 25v3M17 12l-5 7h5l-2 4 7-9h-5',building:'M5 28V5h14v23M19 13h8v15M10 10h4M10 16h4M10 22h4M23 18h1M23 23h1M3 28h26',meter:'M6 4h20v24H6zM10 8h12v9H10zM13 14l3-3 3 2M10 22h3M19 22h3',tool:'M7 5h18v23H7zM12 11h8M12 17h8M12 23h5',doc:'M8 3h11l6 6v20H8zM19 3v6h6M12 14h9M12 18h9M12 22h5M21 21l-2 3h3l-2 3',evcharge:'M2 22v-5l3-6h11l3 6v5zM2 17h17M4.5 22a2.2 2.2 0 1 0 4.4 0M12.5 22a2.2 2.2 0 1 0 4.4 0M24 6h6v6h-6zM25.5 3v3M28.5 3v3M27 12v4h-4v4h-4'};
+const paths={sprinkler:'M16 4v6M10 10h12M13 10v5h6v-5M16 15v4M10 22l-4 5M16 22v6M22 22l4 5M11 19h10',order:'M9 5h14v23H9zM13 3h6v4h-6zM17 11l-4 6h4l-2 5 6-7h-4l2-4',cert:'M16 3l3 3h4v4l3 3-3 3v4h-4l-3 3-3-3H9v-4l-3-3 3-3V6h4zM12 15l3 3 6-6',transformer:'M4 5h24v22H4zM11 10c3 0 3 3 0 3 3 0 3 3 0 3 3 0 3 3 0 3M21 10c-3 0-3 3 0 3-3 0-3 3 0 3-3 0-3 3 0 3M15 9v14M17 9v14',shaft:'M9 3h14v26H9zM13 7v19M17 7v19M21 7v12M9 7h14',cable:'M7 4v20M15 4v20M23 4v20M7 9h16M7 19h16',generator:'M5 9h20v16H5zM9 5h8v4M9 25v3M21 25v3M17 12l-5 7h5l-2 4 7-9h-5',building:'M5 28V5h14v23M19 13h8v15M10 10h4M10 16h4M10 22h4M23 18h1M23 23h1M3 28h26',meter:'M6 4h20v24H6zM10 8h12v9H10zM13 14l3-3 3 2M10 22h3M19 22h3',tool:'M7 5h18v23H7zM12 11h8M12 17h8M12 23h5',doc:'M8 3h11l6 6v20H8zM19 3v6h6M12 14h9M12 18h9M12 22h5M21 21l-2 3h3l-2 3',evcharge:'M2 22v-5l3-6h11l3 6v5zM2 17h17M4.5 22a2.2 2.2 0 1 0 4.4 0M12.5 22a2.2 2.2 0 1 0 4.4 0M24 6h6v6h-6zM25.5 3v3M28.5 3v3M27 12v4h-4v4h-4'};
 const GROUPS=[
  {id:'iec',title:'חברת החשמל',sub:'חדר מונים, פיר, שנאים והזמנות',repos:['meter-room','iec-shaft','iec-transformers','iec-orders'],col:0},
  {id:'proj',title:'חיבורים והנחיות לפרויקט',sub:'גדלי חיבורים ומסמך לאדריכל',repos:['-tiktin-residential-connection-generator-calculator','residential-guidelines'],col:1},
- {id:'feed',title:'כבלים, גנרטורים וטעינה',sub:'חישובים ובחירת ציוד',repos:['cable-sc','tiktin-generator-selector','ev-charging-boards'],col:1},
+ {id:'feed',title:'כבלים, גנרטורים וטעינה',sub:'חישובים ובחירת ציוד',repos:['cable-sc','tiktin-generator-selector','ev-charging-boards','sprinkler-pump'],col:1},
  {id:'site',title:'אתר בנייה ולוחות',sub:'חשמל זמני ותו תקן',repos:['temp-conn','sii-panel-cert'],col:0}];
 const board=document.getElementById('tools');
 const EXT='<svg class="ext" viewBox="0 0 16 16" aria-hidden="true"><path d="M9 3h4v4M13 3L7 9M11 9v4H3V5h4"/></svg>';
