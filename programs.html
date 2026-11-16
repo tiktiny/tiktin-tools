@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>תוכנות — משרד טיקטין</title>
+<meta name="theme-color" content="#17364c">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="icons/tiktin-192.png">
+<style>
+:root{color-scheme:light;--ink:#17364c;--muted:#5b6b76;--red:#c8202f;--cu:#b06a2c;--cu2:#d99a5e;--steel:#e9eef1;--line:#d5dee3;--white:#fff}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--steel);color:var(--ink);font-family:Rubik,Arial,sans-serif;font-size:16px;line-height:1.45;display:flex;flex-direction:column;min-height:100dvh}
+header{background:var(--white);border-bottom:3px solid var(--red);flex:0 0 auto}
+.head{display:flex;align-items:center;gap:22px;padding:12px 28px}
+.logo{width:126px;max-height:55px;object-fit:contain}
+.brand{border-right:1px solid var(--line);padding-right:22px}
+.brand h1{font-size:26px;font-weight:700;margin:0;line-height:1.25}
+.brand p{margin:0;color:var(--muted);font-size:14px}
+.hlink{margin-inline-start:auto;flex:none;display:inline-flex;align-items:center;justify-content:center;min-height:32px;padding:0 14px;border-radius:8px;background:var(--red);color:#fff;font-weight:500;font-size:14px;text-decoration:none;white-space:nowrap}
+.hlink:hover{background:#a81825}
+.hlink:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.fz{display:flex;margin-inline-start:10px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;flex:none}
+.fz button{border:0;border-inline-start:1px solid var(--line);background:#fff;height:32px;min-width:34px;padding:0 10px;font:inherit;font-size:14px;color:var(--ink);cursor:pointer;white-space:nowrap}
+.fz button:first-child{border-inline-start:0}
+.fz button:hover{background:var(--steel)}
+.fz .keep{color:var(--red);font-weight:500}
+.fz button:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+#fzToast{position:fixed;left:16px;top:76px;background:var(--ink);color:#fff;padding:8px 14px;border-radius:8px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
+#fzToast.on{opacity:1}
+main{flex:1;padding:20px 28px 22px}
+.list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-content:start}
+.prog{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.prog img{width:52px;height:52px;border-radius:10px;flex:none;object-fit:contain;background:var(--steel)}
+.prog .txt{flex:1;min-width:0}.prog h2{margin:0;font-size:18px;font-weight:700}
+.prog p{margin:2px 0 0;font-size:14px;color:var(--muted)}.prog .v{font-size:13px;color:var(--ink);margin-top:4px}
+.dl{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 18px;border-radius:8px;background:var(--red);color:#fff;font-weight:500;text-decoration:none;white-space:nowrap}
+.dl:hover{background:#a81825}.dl:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.dl svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.note{margin:18px 0 0;font-size:13.5px;color:var(--muted)}
+details.note summary{cursor:pointer;color:var(--ink)}
+@media(max-width:699px){.fz,#fzToast{display:none}.hlink{padding:4px 9px;font-size:12.5px;white-space:normal;text-align:center;max-width:96px;line-height:1.2}.head{padding:10px 14px;gap:12px}.logo{width:86px;max-height:42px}.brand{padding-right:12px}.brand h1{font-size:20px}.brand p{font-size:12px}main{padding:12px}.list{grid-template-columns:1fr}.prog{flex-wrap:wrap}.dl{width:100%}}
+</style>
+</head>
+<body>
+<header><div class="head"><img class="logo" src="tiktin-logo.png" alt="טיקטין תכנון חשמל" width="213" height="92"><div class="brand"><h1>תוכנות טיקטין</h1><p>הורדת התוכנות של משרד טיקטין למחשב · <span class="ver">גרסה V1 · 16.11.2026</span></p></div>
+<a class="hlink" href="./" title="חזרה לאפליקציה הראשית">אפליקציה ראשית</a>
+<div class="fz" role="group" aria-label="גודל התצוגה" title="שינוי גודל התצוגה של הדף הזה בלבד – הדפדפן לא מושפע">
+<button id="fzMinus" title="הקטנה">−</button><button id="fzVal" title="חזרה לגודל רגיל (100%)">100%</button><button id="fzPlus" title="הגדלה">+</button><button id="fzFit" title="הגודל הגדול ביותר שבו הכול נכנס במסך">התאמה למסך</button><button id="fzKeep" class="keep" title="שמירת גודל התצוגה של הדף הזה במחשב הזה">שמירת גודל טופס במסך</button>
+</div></div></header><div id="fzToast" role="status"></div>
+<main><div class="list" id="list"></div>
+<details class="note"><summary>הסבר</summary>הקישורים קבועים: כל לחיצה מורידה את הגרסה העדכנית של התוכנה. אם Windows מציג אזהרה כחולה – ללחוץ "מידע נוסף" ואז "הפעל בכל זאת".</details></main>
+<script>
+// להוספת תוכנה חדשה: שורה אחת כאן + העלאת הקובץ לגרסה "downloads"
+const REL='https://github.com/tiktiny/tiktin-software/releases/download/downloads/';
+const PROGS=[
+ {file:'TiktinPDF-Setup-A.exe',title:'טיקטין PDF',desc:'פתיחה מהירה של קבצי PDF ושרטוטים, מדידה, חותמות ותקן ירוק.',icon:'icons/tiktin-192.png'},
+ {file:'TiktinStamp-Setup.exe',title:'חותמת אוטומטית',desc:'הטבעת חותמת טיקטין בכל עמודי קובץ PDF בלחיצה.',icon:'icons/tiktin-192.png'},
+];
+const dlIcon='<svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>';
+const list=document.getElementById('list');
+list.innerHTML=PROGS.map(p=>`<div class="prog"><img src="${p.icon}" alt=""><div class="txt"><h2>${p.title}</h2><p>${p.desc}</p><div class="v" data-f="${p.file}"></div></div><a class="dl" href="${REL+p.file}" title="הורדת הגרסה העדכנית">${dlIcon}הורדה</a></div>`).join('');
+// גרסה ותאריך עדכון של כל תוכנה, מתוך GitHub
+fetch('https://api.github.com/repos/tiktiny/tiktin-software/releases/tags/downloads').then(r=>r.ok?r.json():null).then(d=>{if(!d)return;
+ for(const a of d.assets||[]){const el=document.querySelector(`.v[data-f="${a.name}"]`);if(!el)continue;
+  const ver=(a.label||'').match(/[A-Z]?\d+(\.\d+)+/);const dt=new Date(a.updated_at).toLocaleDateString('he-IL');
+  el.textContent=(ver?'גרסה '+ver[0]+' · ':'')+'עודכן '+dt}}).catch(()=>{});
+(function(){const KEY='tiktin_programs_zoom',MIN=0.8,MAX=2,STEP=0.1,$=id=>document.getElementById(id),desk=matchMedia('(min-width:700px)');let z=1;
+ try{const s=parseFloat(localStorage.getItem(KEY));if(s>=MIN&&s<=MAX)z=s}catch(e){}
+ const toast=t=>{const el=$('fzToast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('on'),2200)};
+ function set(v){const b=document.body.style;if(!desk.matches){b.zoom='';return}b.zoom=v}
+ const fits=()=>document.documentElement.scrollHeight<=innerHeight+1&&document.documentElement.scrollWidth<=innerWidth+1;
+ function apply(){z=Math.round(Math.min(MAX,Math.max(MIN,z))*100)/100;set(z);$('fzVal').textContent=Math.round(z*100)+'%'}
+ $('fzMinus').onclick=()=>{z-=STEP;apply()};$('fzPlus').onclick=()=>{z+=STEP;apply()};$('fzVal').onclick=()=>{z=1;apply()};
+ $('fzFit').onclick=()=>{let v=MAX;for(;v>MIN;v=Math.round((v-0.05)*100)/100){set(v);if(fits())break}z=v;apply()};
+ $('fzKeep').onclick=()=>{try{localStorage.setItem(KEY,z);toast('גודל התצוגה נשמר במחשב הזה: '+Math.round(z*100)+'%')}catch(e){toast('לא ניתן לשמור במחשב הזה')}};
+ desk.addEventListener('change',apply);apply()})();
+</script>
+</body>
+</html>
