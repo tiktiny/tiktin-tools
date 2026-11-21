@@ -4,6 +4,7 @@
   var URL = 'https://script.google.com/macros/s/AKfycbx0AvcfW7qws-CUUZbpIsVILxuobq18sVkjw6NqULMxfhZnM6Xp8ClZQnW5dtooz90J/exec';
   if (!URL || URL.indexOf('http') !== 0) return;
   var APP = document.documentElement.getAttribute('data-app') || location.pathname.split('/')[1] || 'portal';
+  if (window.__tiktinTrackOn) return; window.__tiktinTrackOn = true;
   function vid() {
     try {
       var v = localStorage.getItem('tiktin_vid');
@@ -55,5 +56,13 @@
     } else if (a.classList.contains('hlink')) {
       send('nav', a.textContent.trim());
     }
+  }, true);
+  // הורדות מתוך הטפסים והאפליקציות: ייצוא ל-PDF / Word / Excel, שמירה והורדה
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest && ev.target.closest('button,a,[role=button]');
+    if (!b || b.classList.contains('dl') || b.classList.contains('tool') || b.classList.contains('hlink')) return;
+    var t = (b.getAttribute('title') || '') + ' ' + (b.textContent || '');
+    t = t.replace(/\s+/g, ' ').trim();
+    if (/PDF|Word|Excel|ייצוא|הורדה|הורד|DXF|DWG/i.test(t)) send('download', document.title + ' – ' + (b.textContent || t).replace(/\s+/g, ' ').trim().slice(0, 60));
   }, true);
 })();
