@@ -43,7 +43,7 @@ details.note summary{cursor:pointer;color:var(--ink)}
 </style>
 </head>
 <body>
-<header><div class="head"><img class="logo" src="tiktin-logo.png" alt="טיקטין תכנון חשמל" width="213" height="92"><div class="brand"><h1>תוספי רוויט</h1><p>התוספים של משרד טיקטין לרוויט 2024–2027 · <span class="ver">גרסה V1 · 24.11.2026</span></p></div>
+<header><div class="head"><img class="logo" src="tiktin-logo.png" alt="טיקטין תכנון חשמל" width="213" height="92"><div class="brand"><h1>תוספי רוויט</h1><p>התוספים של משרד טיקטין לרוויט 2024–2027 · <span class="ver">גרסה V2 · 25.11.2026</span></p></div>
 <a class="hlink" href="./" title="חזרה לאפליקציה הראשית">אפליקציה ראשית</a>
 <div class="fz" role="group" aria-label="גודל התצוגה" title="שינוי גודל התצוגה של הדף הזה בלבד – הדפדפן לא מושפע">
 <button id="fzMinus" title="הקטנה">−</button><button id="fzVal" title="חזרה לגודל רגיל (100%)">100%</button><button id="fzPlus" title="הגדלה">+</button><button id="fzFit" title="הגודל הגדול ביותר שבו הכול נכנס במסך">התאמה למסך</button><button id="fzKeep" class="keep" title="שמירת גודל התצוגה של הדף הזה במחשב הזה">שמירת גודל טופס במסך</button>
@@ -54,7 +54,7 @@ details.note summary{cursor:pointer;color:var(--ink)}
 // להוספת תוסף חדש: שורה אחת כאן + העלאת הקובץ לגרסה "downloads" במאגר tiktin-software
 const REL='https://github.com/tiktiny/tiktin-software/releases/download/downloads/';
 const PROGS=[
- {file:'TiktinIecManholeSetup.exe',title:'שוחת כבלים חח"י',desc:'יצירת שוחת חח"י לפי מידות וצנרת 6 ו-8 צול בכל דופן: משפחה במודל, פרט עם תוכנית ו-2 חתכים, סימון MANHOLE ותיוג.',icon:'icons/revit-manhole.png'},
+ {file:'TiktinIecManholeSetup.exe',title:'שוחת כבלים חח"י',desc:'לוחצים על דופן בציור של השוחה, בוחרים צנרת 6 ו-8 צול ומאיזו דופן הכבלים נכנסים – מידות השוחה מחושבות לבד (80 ס"מ בפנייה של 90°, 10 ס"מ בשאר). נוצרים שוחה במודל, צנרת חח"י נפרדת, תיוג MANHOLE ופרט במקרא עם תוכנית ו-2 חתכים.',icon:'icons/revit-manhole.png'},
 ];
 const dlIcon='<svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>';
 const list=document.getElementById('list');
